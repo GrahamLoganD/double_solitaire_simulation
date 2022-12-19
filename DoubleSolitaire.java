@@ -170,10 +170,10 @@ public class DoubleSolitaire {
                      * Prints all the cards in the pile.
                      */
                     public void print() {
-                        for (Card card : facedownCards) {
+                        for (Card card : faceupCards) {
                             card.print();
                         }
-                        for (Card card : faceupCards) {
+                        for (Card card : facedownCards) {
                             card.print();
                         }
                     }
@@ -243,6 +243,19 @@ public class DoubleSolitaire {
                     return cards.removeFirst();
                 }
 
+                /**
+                 * Adds a card to the stock and turns it facedown.
+                 * 
+                 * @param card - The card to add.
+                 */
+                public void addCard(Card card) {
+                    card.turnFacedown();
+                    cards.addFirst(card);
+                }
+
+                /**
+                 * Reverses the stock.
+                 */
                 public void reverse() {
                     LinkedList<Card> reversed = new LinkedList<Card>();
                     while (getSize() > 0) {
@@ -296,6 +309,14 @@ public class DoubleSolitaire {
                 }
 
                 /**
+                 * Draws a card off the top of the waste
+                 * @return - the card drawn
+                 */
+                public Card drawCard() {
+                    return cards.removeFirst();
+                }
+
+                /**
                  * Prints all the cards in the waste.
                  */
                 public void print() {
@@ -317,11 +338,25 @@ public class DoubleSolitaire {
             }
 
             /**
+             * Resets the waste into the stock.
+             */
+            public void resetStock() {
+                while (waste.getSize() > 0) {
+                    stock.addCard(waste.drawCard());
+                }
+            }
+
+            /**
              * Turns three cards at once from the stock into the waste.
              */
             public void turnStock() {
                 for (int i = 0; i < 3; i++) {
-                    waste.layCard(stock.drawCard());
+                    if (stock.getSize() > 0) {
+                        waste.layCard(stock.drawCard());
+                    } else {
+                        resetStock();
+                        return;
+                    }
                 }
             }
 
@@ -361,7 +396,7 @@ public class DoubleSolitaire {
         }
 
         public void takeTurn() {
-
+            layout.turnStock();
         }
 
         /**
