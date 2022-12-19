@@ -1,5 +1,5 @@
 /**
- * A tableau of seven piles for playing solitaire.
+ * A tableau of seven piles for playing olitaire.
  */
 public class Tableau {
     /**
@@ -27,10 +27,9 @@ public class Tableau {
      * Prints all the piles in the tableau.
      */
     public void print() {
-        int i = 1;
-        for (Pile pile : piles) {
-            System.out.printf("Pile %d%n", i++);
-            pile.print();
+        for (int i = 0; i < piles.length; i++) {
+            System.out.printf("Pile %d:%n", i + 1);
+            piles[i].print();
             System.out.println();
         }
     }

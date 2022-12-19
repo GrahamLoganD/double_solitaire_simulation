@@ -12,6 +12,9 @@ public class Player {
      */
     Layout layout;
 
+    /**
+     * Constructs a new solitaire player.
+     */
     public Player() {
         deck = new Deck();
         layout = new Layout(deck);
