@@ -39,7 +39,9 @@ public class Pile {
      * Turns the top card of the pile faceup.
      */
     public void turnFaceup() {
-        faceupCards.add(facedownCards.removeFirst());
+        Card card = facedownCards.removeFirst();
+        card.turnFaceup();
+        faceupCards.add(card);
     }
 
     /**

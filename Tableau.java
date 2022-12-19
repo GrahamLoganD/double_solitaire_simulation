@@ -15,6 +15,7 @@ public class Tableau {
     public Tableau(Deck deck) {
         piles = new Pile[7];
         for (int i = 0; i < piles.length; i++) {
+            piles[i] = new Pile();
             for (int j = 0; j < i + 1; j++) {
                 piles[i].layCard(deck.drawCard());
             }
@@ -26,8 +27,11 @@ public class Tableau {
      * Prints all the piles in the tableau.
      */
     public void print() {
+        int i = 1;
         for (Pile pile : piles) {
+            System.out.printf("Pile %d%n", i++);
             pile.print();
+            System.out.println();
         }
     }
 }
