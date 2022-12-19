@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 
 /**
- * A fanned pile of cards for playing solitaire.
+ * A fanned pile of cards for playing Solitaire.
  */
 public class Pile {
     /**

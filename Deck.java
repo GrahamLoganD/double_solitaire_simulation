@@ -10,6 +10,14 @@ public class Deck {
     private LinkedList<Card> cards;
 
     /**
+     * 
+     * @return the number of cards in the deck
+     */
+    public int getSize() {
+        return cards.size();
+    }
+
+    /**
      * Constructs a shuffled standard 52-card deck.
      */
     public Deck() {
