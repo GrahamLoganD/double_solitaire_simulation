@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 
 /**
- * A stock for playing Solitaire.
+ * A stock for playing solitaire.
  */
 public class Stock {
     /**

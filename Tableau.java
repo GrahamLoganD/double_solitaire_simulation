@@ -1,5 +1,5 @@
 /**
- * A tableau of seven piles for playing Solitaire.
+ * A tableau of seven piles for playing solitaire.
  */
 public class Tableau {
     /**
