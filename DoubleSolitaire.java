@@ -18,7 +18,7 @@ public class DoubleSolitaire {
     /**
      * A solitaire player.
      */
-    public class Player {
+    private class Player {
         /**
          * The standard 52-card deck.
          */
@@ -37,7 +37,7 @@ public class DoubleSolitaire {
         /**
          * A standard 52-card deck.
          */
-        public class Deck {
+        private class Deck {
             /**
              * The list of cards in the deck.
              */
@@ -47,14 +47,14 @@ public class DoubleSolitaire {
              * 
              * @return the number of cards in the deck
              */
-            public int getSize() {
+            private int getSize() {
                 return cards.size();
             }
 
             /**
              * Constructs a shuffled standard 52-card deck.
              */
-            public Deck() {
+            private Deck() {
                 cards = new LinkedList<Card>();
                 for (Card.Suit suit : Card.Suit.values()) {
                     for (Card.Rank rank : Card.Rank.values()) {
@@ -67,7 +67,7 @@ public class DoubleSolitaire {
             /**
              * Shuffles the deck.
              */
-            public void Shuffle() {
+            private void Shuffle() {
                 LinkedList<Card> shuffled = new LinkedList<Card>();
                 while (!cards.isEmpty()) {
                     shuffled.add(cards.remove((int) (Math.random() * cards.size())));
@@ -80,14 +80,14 @@ public class DoubleSolitaire {
              * 
              * @return the card drawn
              */
-            public Card drawCard() {
+            private Card drawCard() {
                 return cards.remove();
             }
 
             /**
              * Prints all the cards in the deck.
              */
-            public void print() {
+            private void print() {
                 for (Card card : cards) {
                     card.print();
                 }
@@ -97,7 +97,7 @@ public class DoubleSolitaire {
         /**
          * A layout for playing solitaire.
          */
-        public class Layout {
+        private class Layout {
             /**
              * The tableau.
              */
@@ -116,7 +116,7 @@ public class DoubleSolitaire {
             /**
              * A tableau of seven piles for playing olitaire.
              */
-            public class Tableau {
+            private class Tableau {
                 /**
                  * The array of piles.
                  */
@@ -125,7 +125,7 @@ public class DoubleSolitaire {
                 /**
                  * A fanned pile of cards for playing solitaire.
                  */
-                public class Pile {
+                private class Pile {
                     /**
                      * The list of facedown cards in the pile.
                      */
@@ -139,7 +139,7 @@ public class DoubleSolitaire {
                     /**
                      * Constructs an empty pile.
                      */
-                    public Pile() {
+                    private Pile() {
                         facedownCards = new LinkedList<Card>();
                         faceupCards = new LinkedList<Card>();
                     }
@@ -149,7 +149,7 @@ public class DoubleSolitaire {
                      * 
                      * @param card - The card to lay
                      */
-                    public void layCard(Card card) {
+                    private void layCard(Card card) {
                         if (card.getFacing() == Card.Facing.FACEDOWN) {
                             facedownCards.add(card);
                         } else {
@@ -160,7 +160,7 @@ public class DoubleSolitaire {
                     /**
                      * Turns the top card of the pile faceup.
                      */
-                    public void turnFaceup() {
+                    private void turnFaceup() {
                         Card card = facedownCards.removeFirst();
                         card.turnFaceup();
                         faceupCards.add(card);
@@ -169,7 +169,7 @@ public class DoubleSolitaire {
                     /**
                      * Prints all the cards in the pile.
                      */
-                    public void print() {
+                    private void print() {
                         for (Card card : faceupCards) {
                             card.print();
                         }
@@ -184,7 +184,7 @@ public class DoubleSolitaire {
                  * 
                  * @param deck - The deck to draw from.
                  */
-                public Tableau(Deck deck) {
+                private Tableau(Deck deck) {
                     piles = new Pile[7];
                     for (int i = 0; i < piles.length; i++) {
                         piles[i] = new Pile();
@@ -198,7 +198,7 @@ public class DoubleSolitaire {
                 /**
                  * Prints all the piles in the tableau.
                  */
-                public void print() {
+                private void print() {
                     for (int i = 0; i < piles.length; i++) {
                         System.out.printf("Pile %d:%n", i + 1);
                         piles[i].print();
@@ -210,7 +210,7 @@ public class DoubleSolitaire {
             /**
              * A stock for playing solitaire.
              */
-            public class Stock {
+            private class Stock {
                 /**
                  * The list of cards in the stock.
                  */
@@ -220,14 +220,14 @@ public class DoubleSolitaire {
                  * 
                  * @return the number of cards in the stock
                  */
-                public int getSize() {
+                private int getSize() {
                     return cards.size();
                 }
 
                 /**
                  * Constructs a stock by drawing cards from the deck.
                  */
-                public Stock(Deck deck) {
+                private Stock(Deck deck) {
                     cards = new LinkedList<Card>();
                     while (deck.getSize() > 0) {
                         cards.add(deck.drawCard());
@@ -239,7 +239,7 @@ public class DoubleSolitaire {
                  * 
                  * @return the card drawn
                  */
-                public Card drawCard() {
+                private Card drawCard() {
                     return cards.removeFirst();
                 }
 
@@ -248,7 +248,7 @@ public class DoubleSolitaire {
                  * 
                  * @param card - The card to add.
                  */
-                public void addCard(Card card) {
+                private void addCard(Card card) {
                     card.turnFacedown();
                     cards.addFirst(card);
                 }
@@ -256,7 +256,7 @@ public class DoubleSolitaire {
                 /**
                  * Reverses the stock.
                  */
-                public void reverse() {
+                private void reverse() {
                     LinkedList<Card> reversed = new LinkedList<Card>();
                     while (getSize() > 0) {
                         reversed.addFirst(cards.removeFirst());
@@ -267,7 +267,7 @@ public class DoubleSolitaire {
                 /**
                  * Prints all the cards in the stock.
                  */
-                public void print() {
+                private void print() {
                     for (Card card : cards) {
                         card.print();
                     }
@@ -277,7 +277,7 @@ public class DoubleSolitaire {
             /**
              * A waste for playing solitaire.
              */
-            public class Waste {
+            private class Waste {
                 /**
                  * The list of cards in the waste.
                  */
@@ -287,14 +287,14 @@ public class DoubleSolitaire {
                  * 
                  * @return the number of cards in the waste
                  */
-                public int getSize() {
+                private int getSize() {
                     return cards.size();
                 }
 
                 /**
                  * Constructs an empty waste.
                  */
-                public Waste() {
+                private Waste() {
                     cards = new LinkedList<Card>();
                 }
 
@@ -303,7 +303,7 @@ public class DoubleSolitaire {
                  * 
                  * @param card - the card to lay
                  */
-                public void layCard(Card card) {
+                private void layCard(Card card) {
                     card.turnFaceup();
                     cards.addFirst(card);
                 }
@@ -313,14 +313,14 @@ public class DoubleSolitaire {
                  * 
                  * @return - the card drawn
                  */
-                public Card drawCard() {
+                private Card drawCard() {
                     return cards.removeFirst();
                 }
 
                 /**
                  * Prints all the cards in the waste.
                  */
-                public void print() {
+                private void print() {
                     for (Card card : cards) {
                         card.print();
                     }
@@ -332,7 +332,7 @@ public class DoubleSolitaire {
              * 
              * @param deck - The deck to draw from.
              */
-            public Layout(Deck deck) {
+            private Layout(Deck deck) {
                 tableau = new Tableau(deck);
                 stock = new Stock(deck);
                 waste = new Waste();
@@ -341,7 +341,7 @@ public class DoubleSolitaire {
             /**
              * Resets the waste into the stock.
              */
-            public void resetStock() {
+            private void resetStock() {
                 while (waste.getSize() > 0) {
                     stock.addCard(waste.drawCard());
                 }
@@ -350,7 +350,7 @@ public class DoubleSolitaire {
             /**
              * Turns three cards at once from the stock into the waste.
              */
-            public void turnStock() {
+            private void turnStock() {
                 for (int i = 0; i < 3; i++) {
                     if (stock.getSize() > 0) {
                         waste.layCard(stock.drawCard());
@@ -364,7 +364,7 @@ public class DoubleSolitaire {
             /**
              * Prints all the cards in the layout.
              */
-            public void print() {
+            private void print() {
                 System.out.println("Tableau:");
                 tableau.print();
                 System.out.println();
@@ -383,27 +383,27 @@ public class DoubleSolitaire {
          * 
          * @return {@code true} if the player is stuck
          */
-        public boolean isStuck() {
+        private boolean isStuck() {
             return isStuck;
         }
 
         /**
          * Constructs a new solitaire player.
          */
-        public Player() {
+        private Player() {
             deck = new Deck();
             layout = new Layout(deck);
             isStuck = false;
         }
 
-        public void takeTurn() {
+        private void takeTurn() {
             layout.turnStock();
         }
 
         /**
          * Reverses the player's stock.
          */
-        public void reverse() {
+        private void reverse() {
             while (layout.waste.getSize() != 0) {
                 layout.turnStock();
             }
@@ -413,14 +413,14 @@ public class DoubleSolitaire {
         /**
          * Unsticks the player.
          */
-        public void unstick() {
+        private void unstick() {
             isStuck = false;
         }
 
         /**
          * Prints all the cards controlled by the player.
          */
-        public void print() {
+        private void print() {
             System.out.println("Deck:");
             deck.print();
             System.out.println();
@@ -434,20 +434,20 @@ public class DoubleSolitaire {
     /**
      * A foundation
      */
-    public class Foundation {
+    private class Foundation {
         /**
          * The list of cards in the foundation.
          */
         private LinkedList<Card> cards;
 
-        public Foundation() {
+        private Foundation() {
             cards = new LinkedList<Card>();
         }
 
         /**
          * Prints all the cards in the foundation.
          */
-        public void print() {
+        private void print() {
             for (Card card : cards) {
                 card.print();
             }
@@ -458,7 +458,7 @@ public class DoubleSolitaire {
      * 
      * @return {@code true} if all the players are stuck
      */
-    public boolean checkAllStuck() {
+    private boolean checkAllStuck() {
         for (Player player : players) {
             if (!player.isStuck()) {
                 return false;
@@ -483,7 +483,7 @@ public class DoubleSolitaire {
     /**
      * Reverses the stocks of all players.
      */
-    public void reverse() {
+    private void reverse() {
         for (Player player : players) {
             player.reverse();
         }
@@ -492,7 +492,7 @@ public class DoubleSolitaire {
     /**
      * Resets the stuck trackers of all players.
      */
-    public void unstickAll() {
+    private void unstickAll() {
         for (Player player : players) {
             player.unstick();
         }
