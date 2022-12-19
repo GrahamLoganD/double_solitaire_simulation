@@ -22,17 +22,17 @@ public class DoubleSolitaire {
         /**
          * The standard 52-card deck.
          */
-        Deck deck;
+        private Deck deck;
 
         /**
          * The solitaire layout.
          */
-        Layout layout;
+        private Layout layout;
 
         /**
          * {@code true} if the player is stuck
          */
-        boolean isStuck;
+        private boolean isStuck;
 
         /**
          * A standard 52-card deck.
@@ -101,17 +101,17 @@ public class DoubleSolitaire {
             /**
              * The tableau.
              */
-            Tableau tableau;
+            private Tableau tableau;
 
             /**
              * The stock.
              */
-            Stock stock;
+            private Stock stock;
 
             /**
              * The waste.
              */
-            Waste waste;
+            private Waste waste;
 
             /**
              * A tableau of seven piles for playing olitaire.
@@ -120,7 +120,7 @@ public class DoubleSolitaire {
                 /**
                  * The array of piles.
                  */
-                Pile[] piles;
+                private Pile[] piles;
 
                 /**
                  * A fanned pile of cards for playing solitaire.
@@ -310,6 +310,7 @@ public class DoubleSolitaire {
 
                 /**
                  * Draws a card off the top of the waste
+                 * 
                  * @return - the card drawn
                  */
                 public Card drawCard() {

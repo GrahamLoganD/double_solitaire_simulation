@@ -1,6 +1,6 @@
 public class DoubleSolitaireSimulation {
     public static void main(String[] args) {
-        DoubleSolitaire doubleSolitaire = new DoubleSolitaire(1);
+        DoubleSolitaire doubleSolitaire = new DoubleSolitaire(3);
         doubleSolitaire.print();
         doubleSolitaire.runRound();
         doubleSolitaire.print();
