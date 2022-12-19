@@ -30,6 +30,11 @@ public class DoubleSolitaire {
         Layout layout;
 
         /**
+         * {@code true} if the player is stuck
+         */
+        boolean isStuck;
+
+        /**
          * A standard 52-card deck.
          */
         public class Deck {
@@ -212,6 +217,14 @@ public class DoubleSolitaire {
                 private LinkedList<Card> cards;
 
                 /**
+                 * 
+                 * @return the number of cards in the stock
+                 */
+                public int getSize() {
+                    return cards.size();
+                }
+
+                /**
                  * Constructs a stock by drawing cards from the deck.
                  */
                 public Stock(Deck deck) {
@@ -219,6 +232,23 @@ public class DoubleSolitaire {
                     while (deck.getSize() > 0) {
                         cards.add(deck.drawCard());
                     }
+                }
+
+                /**
+                 * Draw a card from the stock.
+                 * 
+                 * @return the card drawn
+                 */
+                public Card drawCard() {
+                    return cards.removeFirst();
+                }
+
+                public void reverse() {
+                    LinkedList<Card> reversed = new LinkedList<Card>();
+                    while (getSize() > 0) {
+                        reversed.addFirst(cards.removeFirst());
+                    }
+                    cards = reversed;
                 }
 
                 /**
@@ -241,10 +271,28 @@ public class DoubleSolitaire {
                 private LinkedList<Card> cards;
 
                 /**
+                 * 
+                 * @return the number of cards in the waste
+                 */
+                public int getSize() {
+                    return cards.size();
+                }
+
+                /**
                  * Constructs an empty waste.
                  */
                 public Waste() {
                     cards = new LinkedList<Card>();
+                }
+
+                /**
+                 * Lay a card into the waste
+                 * 
+                 * @param card - the card to lay
+                 */
+                public void layCard(Card card) {
+                    card.turnFaceup();
+                    cards.addFirst(card);
                 }
 
                 /**
@@ -269,6 +317,15 @@ public class DoubleSolitaire {
             }
 
             /**
+             * Turns three cards at once from the stock into the waste.
+             */
+            public void turnStock() {
+                for (int i = 0; i < 3; i++) {
+                    waste.layCard(stock.drawCard());
+                }
+            }
+
+            /**
              * Prints all the cards in the layout.
              */
             public void print() {
@@ -287,11 +344,41 @@ public class DoubleSolitaire {
         }
 
         /**
+         * 
+         * @return {@code true} if the player is stuck
+         */
+        public boolean isStuck() {
+            return isStuck;
+        }
+
+        /**
          * Constructs a new solitaire player.
          */
         public Player() {
             deck = new Deck();
             layout = new Layout(deck);
+            isStuck = false;
+        }
+
+        public void takeTurn() {
+
+        }
+
+        /**
+         * Reverses the player's stock.
+         */
+        public void reverse() {
+            while (layout.waste.getSize() != 0) {
+                layout.turnStock();
+            }
+            layout.stock.reverse();
+        }
+
+        /**
+         * Unsticks the player.
+         */
+        public void unstick() {
+            isStuck = false;
         }
 
         /**
@@ -332,6 +419,19 @@ public class DoubleSolitaire {
     }
 
     /**
+     * 
+     * @return {@code true} if all the players are stuck
+     */
+    public boolean checkAllStuck() {
+        for (Player player : players) {
+            if (!player.isStuck()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Constructs a game of double solitaire.
      * 
      * @param playerCount - The number of players in the game.
@@ -341,6 +441,50 @@ public class DoubleSolitaire {
         foundations = new ArrayList<Foundation>();
         for (int i = 0; i < playerCount; i++) {
             players.add(new Player());
+        }
+    }
+
+    /**
+     * Reverses the stocks of all players.
+     */
+    public void reverse() {
+        for (Player player : players) {
+            player.reverse();
+        }
+    }
+
+    /**
+     * Resets the stuck trackers of all players.
+     */
+    public void unstickAll() {
+        for (Player player : players) {
+            player.unstick();
+        }
+    }
+
+    /**
+     * Each player takes a turn in a random order.
+     */
+    public void runRound() {
+        ArrayList<Player> randomPlayers = (ArrayList<Player>) players.clone();
+        while (!randomPlayers.isEmpty()) {
+            int nextPlayer = (int) (Math.random() * randomPlayers.size());
+            randomPlayers.get(nextPlayer).takeTurn();
+            randomPlayers.remove(nextPlayer);
+        }
+    }
+
+    /**
+     * Runs a complete game of double solitaire.
+     */
+    public void runGame() {
+        while (!checkAllStuck()) {
+            runRound();
+        }
+        reverse();
+        unstickAll();
+        while (!checkAllStuck()) {
+            runRound();
         }
     }
 
