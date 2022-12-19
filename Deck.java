@@ -9,6 +9,7 @@ public class Deck {
                 cardsList.add(new Card(suit, rank));
             }
         }
+        Shuffle();
     }
 
     public void Shuffle() {
