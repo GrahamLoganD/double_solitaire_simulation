@@ -1,7 +1,5 @@
 import java.util.LinkedList;
 
-import javax.print.event.PrintJobListener;
-
 /**
  * A fanned pile of cards for playing solitaire.
  */
