@@ -28,10 +28,10 @@ final class Pile {
      * @param card - The card to lay
      */
     void layCard(Card card) {
-        if (card.getFacing() == Card.Facing.FACEDOWN) {
-            facedownCards.add(card);
+        if (card.getFacing() == Facing.FACEDOWN) {
+            facedownCards.addFirst(card);
         } else {
-            faceupCards.add(card);
+            faceupCards.addFirst(card);
         }
     }
 
@@ -41,7 +41,7 @@ final class Pile {
     void turnFaceup() {
         Card card = facedownCards.removeFirst();
         card.turnFaceup();
-        faceupCards.add(card);
+        faceupCards.addFirst(card);
     }
 
     /**

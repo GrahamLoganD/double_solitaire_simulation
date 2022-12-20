@@ -32,7 +32,7 @@ final class DoubleSolitaire {
      * 
      * @param playerCount - The number of players in the game.
      */
-    public DoubleSolitaire(int playerCount) {
+    DoubleSolitaire(int playerCount) {
         players = new ArrayList<Player>();
         foundations = new ArrayList<Foundation>();
         for (int i = 0; i < playerCount; i++) {
@@ -61,8 +61,8 @@ final class DoubleSolitaire {
     /**
      * Each player takes a turn in a random order.
      */
-    public void runRound() {
-        ArrayList<Player> randomPlayers = (ArrayList<Player>) players.clone();
+    void runRound() {
+        ArrayList<Player> randomPlayers = (ArrayList<Player>) players.clone(); // This warning is probably fine
         while (!randomPlayers.isEmpty()) {
             int nextPlayer = (int) (Math.random() * randomPlayers.size());
             randomPlayers.get(nextPlayer).takeTurn();
@@ -73,7 +73,7 @@ final class DoubleSolitaire {
     /**
      * Runs a complete game of double solitaire.
      */
-    public void runGame() {
+    void runGame() {
         while (!checkAllStuck()) {
             runRound();
         }
@@ -87,7 +87,7 @@ final class DoubleSolitaire {
     /**
      * Prints all the cards in the game.
      */
-    public void print() {
+    void print() {
         for (int i = 0; i < players.size(); i++) {
             System.out.printf("Player %d:%n", i + 1);
             players.get(i).print();

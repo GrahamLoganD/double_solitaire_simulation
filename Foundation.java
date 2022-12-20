@@ -9,6 +9,9 @@ final class Foundation {
      */
     private LinkedList<Card> cards;
 
+    /**
+     * Constructs an empty foundation.
+     */
     Foundation() {
         cards = new LinkedList<Card>();
     }

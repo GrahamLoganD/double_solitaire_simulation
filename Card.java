@@ -3,63 +3,6 @@
  */
 public class Card {
     /**
-     * The possible suits.
-     */
-    enum Suit {
-        CLUBS,
-        DIAMONDS,
-        HEARTS,
-        SPADES;
-
-        /**
-         * The possible colors.
-         */
-        enum Color {
-            RED,
-            BLACK
-        }
-
-        /**
-         * 
-         * @return The color of the suit.
-         */
-        public Color getColor() {
-            if (this == CLUBS || this == SPADES) {
-                return Color.BLACK;
-            } else {
-                return Color.RED;
-            }
-        }
-    }
-
-    /**
-     * The possible ranks.
-     */
-    enum Rank {
-        ACE,
-        TWO,
-        THREE,
-        FOUR,
-        FIVE,
-        SIX,
-        SEVEN,
-        EIGHT,
-        NINE,
-        TEN,
-        JACK,
-        QUEEN,
-        KING
-    }
-
-    /**
-     * The possible facings.
-     */
-    enum Facing {
-        FACEDOWN,
-        FACEUP
-    }
-
-    /**
      * The suit of the card.
      */
     private Suit suit;
@@ -78,7 +21,7 @@ public class Card {
      * 
      * @return the suit of the card
      */
-    public Suit getSuit() {
+    Suit getSuit() {
         return suit;
     }
 
@@ -86,7 +29,7 @@ public class Card {
      * 
      * @return the color of the card
      */
-    public Suit.Color getColor() {
+    Color getColor() {
         return suit.getColor();
     }
 
@@ -94,7 +37,7 @@ public class Card {
      * 
      * @return the rank of the card
      */
-    public Rank getRank() {
+    Rank getRank() {
         return rank;
     }
 
@@ -102,7 +45,7 @@ public class Card {
      * 
      * @return {@code true} if the card is an ace, otherwise {@code false}
      */
-    public boolean isAce() {
+    boolean isAce() {
         if (rank == Rank.ACE) {
             return true;
         } else {
@@ -114,7 +57,7 @@ public class Card {
      * 
      * @return the facing of the card
      */
-    public Facing getFacing() {
+    Facing getFacing() {
         return facing;
     }
 
@@ -124,7 +67,7 @@ public class Card {
      * @return {@code true} if the card can be placed on the given foundation card,
      *         {@code false} otherwise
      */
-    public boolean canBeBuiltUp(Card foundationCard) {
+    boolean canBeBuiltUp(Card foundationCard) {
         if (getSuit() == foundationCard.getSuit() && getRank().ordinal() == (foundationCard.getRank().ordinal() + 1)) {
             return true;
         } else {
@@ -138,7 +81,7 @@ public class Card {
      * @return {@code true} if the card can be placed on the given tableau card,
      *         {@code false} otherwise
      */
-    public boolean canBeBuiltDown(Card tableauCard) {
+    boolean canBeBuiltDown(Card tableauCard) {
         if (getColor() != tableauCard.getColor() && getRank().ordinal() == (tableauCard.getRank().ordinal() - 1)) {
             return true;
         } else {
@@ -153,7 +96,7 @@ public class Card {
      * @param rank   - The rank of the card.
      * @param facing - The facing of the card.
      */
-    public Card(
+    Card(
             Suit suit,
             Rank rank,
             Facing facing) {
@@ -165,21 +108,21 @@ public class Card {
     /**
      * Turns the card faceup.
      */
-    public void turnFaceup() {
+    void turnFaceup() {
         facing = Facing.FACEUP;
     }
 
     /**
      * Turns the card facedown.
      */
-    public void turnFacedown() {
+    void turnFacedown() {
         facing = Facing.FACEDOWN;
     }
 
     /**
      * Prints the card.
      */
-    public void print() {
+    void print() {
         System.out.printf("%s of %s (%s)%n", getRank().toString(), getSuit().toString(), getFacing().toString());
     }
 }

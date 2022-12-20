@@ -22,9 +22,9 @@ class Deck {
      */
     Deck() {
         cards = new LinkedList<Card>();
-        for (Card.Suit suit : Card.Suit.values()) {
-            for (Card.Rank rank : Card.Rank.values()) {
-                cards.add(new Card(suit, rank, Card.Facing.FACEDOWN));
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
+                cards.add(new Card(suit, rank, Facing.FACEDOWN));
             }
         }
         Shuffle();

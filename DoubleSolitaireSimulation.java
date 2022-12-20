@@ -1,5 +1,5 @@
-public class DoubleSolitaireSimulation {
-    public static void main(String[] args) {
+public final class DoubleSolitaireSimulation {
+    public final static void main(String[] args) {
         DoubleSolitaire doubleSolitaire = new DoubleSolitaire(3);
         doubleSolitaire.print();
         doubleSolitaire.runRound();
