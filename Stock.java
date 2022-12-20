@@ -33,6 +33,9 @@ final class Stock {
      * @return the card drawn
      */
     Card drawCard() {
+        if (cards.isEmpty()) {
+            System.out.println("Error Stock.drawCard(): Stock is empty!");
+        }
         return cards.removeFirst();
     }
 
@@ -61,6 +64,9 @@ final class Stock {
      * Prints all the cards in the stock.
      */
     void print() {
+        if (cards.isEmpty()) {
+            System.out.println("Empty");
+        }
         for (Card card : cards) {
             card.print();
         }

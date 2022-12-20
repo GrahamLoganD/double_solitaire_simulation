@@ -40,6 +40,9 @@ final class Waste {
      * @return - the card drawn
      */
     Card drawCard() {
+        if (cards.isEmpty()) {
+            System.out.println("Error Waste.drawCard(): Waste is empty!");
+        }
         return cards.removeFirst();
     }
 
@@ -47,6 +50,9 @@ final class Waste {
      * Prints all the cards in the waste.
      */
     void print() {
+        if (cards.isEmpty()) {
+            System.out.println("Empty");
+        }
         for (Card card : cards) {
             card.print();
         }

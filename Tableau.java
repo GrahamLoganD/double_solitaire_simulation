@@ -17,7 +17,7 @@ final class Tableau {
         for (int i = 0; i < piles.length; i++) {
             piles[i] = new Pile();
             for (int j = 0; j < i + 1; j++) {
-                piles[i].layCard(deck.drawCard());
+                piles[i].layFacedownCard(deck.drawCard());
             }
             piles[i].turnFaceup();
         }

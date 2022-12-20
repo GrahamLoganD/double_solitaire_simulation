@@ -32,6 +32,9 @@ final class Layout {
      * Resets the waste into the stock.
      */
     private void resetStock() {
+        if (stock.getSize() != 0) {
+            System.out.println("Error Layout.resetStock(): Stock is not empty!");
+        }
         while (waste.getSize() > 0) {
             stock.addCard(waste.drawCard());
         }
@@ -51,6 +54,9 @@ final class Layout {
         }
     }
 
+    /**
+     * Reverses the stock.
+     */
     void reverse() {
         while (waste.getSize() != 0) {
             turnStock();
@@ -65,11 +71,9 @@ final class Layout {
         System.out.println("Tableau:");
         tableau.print();
         System.out.println();
-
         System.out.println("Stock:");
         stock.print();
         System.out.println();
-
         System.out.println("Waste:");
         waste.print();
         System.out.println();

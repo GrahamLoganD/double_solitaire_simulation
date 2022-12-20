@@ -20,6 +20,9 @@ final class Foundation {
      * Prints all the cards in the foundation.
      */
     void print() {
+        if (cards.isEmpty()) {
+            System.out.println("Empty");
+        }
         for (Card card : cards) {
             card.print();
         }

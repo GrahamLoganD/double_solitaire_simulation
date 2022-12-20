@@ -34,6 +34,9 @@ final class Player {
         isStuck = false;
     }
 
+    /**
+     * The player performs the top priority possible action.
+     */
     void takeTurn() {
         layout.turnStock();
     }
@@ -59,7 +62,6 @@ final class Player {
         System.out.println("Deck:");
         deck.print();
         System.out.println();
-
         System.out.println("Layout:");
         layout.print();
         System.out.println();

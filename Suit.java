@@ -7,15 +7,23 @@ enum Suit {
     HEARTS(Color.RED),
     SPADES(Color.BLACK);
 
+    /**
+     * The color of the suit.
+     */
     private final Color color;
 
+    /**
+     * Constructs a new suit.
+     * 
+     * @param color - The color of the suit.
+     */
     private Suit(Color color) {
         this.color = color;
     }
 
     /**
      * 
-     * @return The color of the suit.
+     * @return the color of the suit
      */
     Color getColor() {
         return color;

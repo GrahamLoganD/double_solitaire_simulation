@@ -47,6 +47,9 @@ class Deck {
      * @return the card drawn
      */
     Card drawCard() {
+        if (cards.isEmpty()) {
+            System.out.println("Error Deck.drawCard(): Deck is empty.");
+        }
         return cards.remove();
     }
 
@@ -54,6 +57,9 @@ class Deck {
      * Prints all the cards in the deck.
      */
     void print() {
+        if (cards.isEmpty()) {
+            System.out.println("Empty");
+        }
         for (Card card : cards) {
             card.print();
         }
