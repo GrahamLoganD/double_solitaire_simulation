@@ -65,7 +65,7 @@ final class DoubleSolitaire {
         ArrayList<Player> randomPlayers = (ArrayList<Player>) players.clone(); // This warning is probably fine
         while (!randomPlayers.isEmpty()) {
             int nextPlayer = (int) (Math.random() * randomPlayers.size());
-            randomPlayers.get(nextPlayer).takeTurn();
+            randomPlayers.get(nextPlayer).takeTurn(foundations);
             randomPlayers.remove(nextPlayer);
         }
     }
@@ -93,7 +93,6 @@ final class DoubleSolitaire {
             players.get(i).print();
             System.out.println();
         }
-
         for (int i = 0; i < foundations.size(); i++) {
             System.out.printf("Foundation %d:%n", i + 1);
             foundations.get(i).print();

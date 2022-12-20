@@ -55,6 +55,18 @@ public class Card {
 
     /**
      * 
+     * @return {@code true} if the card is a king, otherwise {@code false}
+     */
+    boolean isKing() {
+        if (rank == Rank.KING) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 
      * @return the facing of the card
      */
     Facing getFacing() {

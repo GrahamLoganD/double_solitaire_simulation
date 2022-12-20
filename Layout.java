@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A layout for playing solitaire.
  */
@@ -18,6 +20,19 @@ final class Layout {
     private Waste waste;
 
     /**
+     * {@code true} if the layout is stuck
+     */
+    private boolean isStuck;
+
+    /**
+     * 
+     * @return {@code true} if the layout is stuck
+     */
+    boolean isStuck() {
+        return isStuck;
+    }
+
+    /**
      * Constructs a solitaire layout by drawing cards from the deck.
      * 
      * @param deck - The deck to draw from.
@@ -26,6 +41,7 @@ final class Layout {
         tableau = new Tableau(deck);
         stock = new Stock(deck);
         waste = new Waste();
+        isStuck = false;
     }
 
     /**
@@ -43,7 +59,7 @@ final class Layout {
     /**
      * Turns three cards at once from the stock into the waste.
      */
-    void turnStock() {
+    private void turnStock() {
         for (int i = 0; i < 3; i++) {
             if (stock.getSize() > 0) {
                 waste.layCard(stock.drawCard());
@@ -55,6 +71,25 @@ final class Layout {
     }
 
     /**
+     * The player performs the top priority possible action.
+     */
+    void takeTurn(ArrayList<Foundation> foundations) {
+        if (tableau.playCard(foundations)) {
+            return;
+        }
+        if (waste.playCard(foundations)) {
+            return;
+        }
+        if (tableau.movePile()) {
+            return;
+        }
+        if (tableau.moveFromWaste(waste)) {
+            return;
+        }
+        turnStock();
+    }
+
+    /**
      * Reverses the stock.
      */
     void reverse() {
@@ -62,6 +97,13 @@ final class Layout {
             turnStock();
         }
         stock.reverse();
+    }
+
+    /**
+     * Unsticks the layout.
+     */
+    void unstick() {
+        isStuck = false;
     }
 
     /**

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A solitaire player.
  */
@@ -13,16 +15,11 @@ final class Player {
     private Layout layout;
 
     /**
-     * {@code true} if the player is stuck
-     */
-    private boolean isStuck;
-
-    /**
      * 
      * @return {@code true} if the player is stuck
      */
     boolean isStuck() {
-        return isStuck;
+        return layout.isStuck();
     }
 
     /**
@@ -31,14 +28,13 @@ final class Player {
     Player() {
         deck = new Deck();
         layout = new Layout(deck);
-        isStuck = false;
     }
 
     /**
      * The player performs the top priority possible action.
      */
-    void takeTurn() {
-        layout.turnStock();
+    void takeTurn(ArrayList<Foundation> foundations) {
+        layout.takeTurn(foundations);
     }
 
     /**
@@ -52,7 +48,7 @@ final class Player {
      * Unsticks the player.
      */
     void unstick() {
-        isStuck = false;
+        layout.unstick();
     }
 
     /**

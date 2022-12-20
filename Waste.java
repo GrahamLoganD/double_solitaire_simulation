@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -15,6 +16,17 @@ final class Waste {
      */
     int getSize() {
         return cards.size();
+    }
+
+    /**
+     * 
+     * @return - The top card of the waste.
+     */
+    Card topCard() {
+        if (cards.size() == 0) {
+            System.out.println("Error Waste.topCard(): Waste is empty!");
+        }
+        return cards.getFirst();
     }
 
     /**
@@ -44,6 +56,30 @@ final class Waste {
             System.out.println("Error Waste.drawCard(): Waste is empty!");
         }
         return cards.removeFirst();
+    }
+
+    /**
+     * Plays the top card of the waste if possible.
+     * @param foundations - The list of foundations to play to.
+     * @return {@code true} if a card was played
+     */
+    boolean playCard(ArrayList<Foundation> foundations) {
+        if (cards.isEmpty()) {
+            return false;
+        }
+        if (cards.getFirst().isAce()) {
+            Foundation newFoundation = new Foundation();
+            newFoundation.startAce(cards.removeFirst());
+            foundations.add(newFoundation);
+            return true;
+        }
+        for (Foundation foundation : foundations) {
+            if (foundation.buildUp(cards.getFirst())) {
+                cards.removeFirst();
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
