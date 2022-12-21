@@ -52,7 +52,7 @@ final class DoubleSolitaire {
     /**
      * Resets the stuck trackers of all players.
      */
-    private void unstickAll() {
+    void unstickAll() {
         for (Player player : players) {
             player.unstick();
         }
@@ -65,7 +65,7 @@ final class DoubleSolitaire {
         ArrayList<Player> randomPlayers = (ArrayList<Player>) players.clone(); // This warning is probably fine
         while (!randomPlayers.isEmpty()) {
             int nextPlayer = (int) (Math.random() * randomPlayers.size());
-            randomPlayers.get(nextPlayer).takeTurn(foundations);
+            randomPlayers.get(nextPlayer).takeTurn(this, foundations);
             randomPlayers.remove(nextPlayer);
         }
     }
@@ -88,7 +88,7 @@ final class DoubleSolitaire {
      * 
      * @return the average score of players in the game
      */
-    float averageSCore() {
+    float averageScore() {
         int sum = 0;
         for (Player player : players) {
             sum += player.getScore();

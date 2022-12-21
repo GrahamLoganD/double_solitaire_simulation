@@ -25,6 +25,11 @@ final class Layout {
     private boolean isStuck;
 
     /**
+     * {@code true} if the stock has already been gone through once
+     */
+    private boolean staleStock;
+
+    /**
      * 
      * @return {@code true} if the layout is stuck
      */
@@ -53,18 +58,23 @@ final class Layout {
         stock = new Stock(deck);
         waste = new Waste();
         isStuck = false;
+        staleStock = false;
     }
 
     /**
      * Resets the waste into the stock.
      */
     private void resetStock() {
+        if (staleStock == true) {
+            isStuck = true;
+        }
         if (stock.getSize() != 0) {
             System.out.println("Error Layout.resetStock(): Stock is not empty!");
         }
         while (waste.getSize() > 0) {
             stock.addCard(waste.drawCard());
         }
+        staleStock = true;
     }
 
     /**
@@ -88,18 +98,30 @@ final class Layout {
 
     /**
      * The player performs the top priority possible action.
+     * @param game - The game being played.
+     * @param foundations - The foundations to play on.
      */
-    void takeTurn(ArrayList<Foundation> foundations) {
+    void takeTurn(DoubleSolitaire game, ArrayList<Foundation> foundations) {
         if (tableau.playCard(foundations)) {
+            staleStock = false;
+            unstick();
+            game.unstickAll();
             return;
         }
         if (waste.playCard(foundations)) {
+            staleStock = false;
+            unstick();
+            game.unstickAll();
             return;
         }
         if (tableau.movePile()) {
+            staleStock = false;
+            unstick();
             return;
         }
         if (tableau.moveFromWaste(waste)) {
+            staleStock = false;
+            unstick();
             return;
         }
         turnStock();

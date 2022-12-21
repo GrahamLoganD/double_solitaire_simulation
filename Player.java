@@ -40,9 +40,11 @@ final class Player {
 
     /**
      * The player performs the top priority possible action.
+     * @param game - The game being played.
+     * @param foundations - The foundations to play on.
      */
-    void takeTurn(ArrayList<Foundation> foundations) {
-        layout.takeTurn(foundations);
+    void takeTurn(DoubleSolitaire game, ArrayList<Foundation> foundations) {
+        layout.takeTurn(game, foundations);
     }
 
     /**
