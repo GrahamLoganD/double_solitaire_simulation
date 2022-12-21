@@ -49,7 +49,7 @@ final class Waste {
     /**
      * Draws a card off the top of the waste
      * 
-     * @return - the card drawn
+     * @return the card drawn
      */
     Card drawCard() {
         if (cards.isEmpty()) {

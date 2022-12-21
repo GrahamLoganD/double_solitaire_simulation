@@ -45,6 +45,20 @@ final class Pile {
     }
 
     /**
+     * 
+     * @return {@code true} if there are hidden cards in the pile
+     */
+    boolean hasHidden() {
+        if (facedownCards.size() > 0) {
+            if (faceupCards.size() == 0) {
+                System.out.println("Error Pile.hasHidden(): Pile has facedown cards but no faceup cards!");
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Constructs an empty pile.
      */
     Pile() {
@@ -98,7 +112,7 @@ final class Pile {
             return false;
         }
         if (getSize() == 0) {
-            if (lowPile.rootCard().isKing()) {
+            if (lowPile.rootCard().isKing() && lowPile.hasHidden()) {
                 faceupCards = lowPile.takeFaceupPile();
                 return true;
             }
@@ -127,7 +141,7 @@ final class Pile {
             return false;
         }
         if (faceupCards.size() == 0) {
-            if (waste.topCard().isKing() && faceupCards.size() == 0) {
+            if (waste.topCard().isKing()) {
                 faceupCards.add(waste.drawCard());
                 return true;
             }

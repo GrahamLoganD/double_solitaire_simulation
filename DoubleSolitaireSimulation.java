@@ -1,10 +1,9 @@
 public final class DoubleSolitaireSimulation {
     public final static void main(String[] args) {
-        DoubleSolitaire doubleSolitaire = new DoubleSolitaire(1);
-        doubleSolitaire.print();
-        for (int i = 0; i < 5000; i++) {
+        DoubleSolitaire doubleSolitaire = new DoubleSolitaire(3);
+        for (int i = 0; i < 500; i++) {
             doubleSolitaire.runRound();
         }
-        doubleSolitaire.print();
+        System.out.print(doubleSolitaire.averageSCore());
     }
 }

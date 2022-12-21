@@ -23,6 +23,14 @@ final class Player {
     }
 
     /**
+     * 
+     * @return the score of the player
+     */
+    int getScore() {
+        return layout.getScore();
+    }
+
+    /**
      * Constructs a new solitaire player.
      */
     Player() {

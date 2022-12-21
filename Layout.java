@@ -33,6 +33,17 @@ final class Layout {
     }
 
     /**
+     * 
+     * @return the number of cards left in the layout
+     */
+    int getScore() {
+        if (!isStuck()) {
+            System.out.println("Error Layout.getScore(): Calculating score of an unstuck layout!");
+        }
+        return tableau.getSize() + stock.getSize() + waste.getSize();
+    }
+
+    /**
      * Constructs a solitaire layout by drawing cards from the deck.
      * 
      * @param deck - The deck to draw from.
@@ -60,13 +71,18 @@ final class Layout {
      * Turns three cards at once from the stock into the waste.
      */
     private void turnStock() {
-        for (int i = 0; i < 3; i++) {
-            if (stock.getSize() > 0) {
+        if (stock.getSize() == 0) {
+            resetStock();
+            return;
+        }
+        if (stock.getSize() < 3) {
+            while (stock.getSize() > 0) {
                 waste.layCard(stock.drawCard());
-            } else {
-                resetStock();
-                return;
             }
+            return;
+        }
+        for (int i = 0; i < 3; i++) {
+            waste.layCard(stock.drawCard());
         }
     }
 

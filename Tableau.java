@@ -29,6 +29,18 @@ final class Tableau {
     }
 
     /**
+     * 
+     * @return the number of cards in the tableau
+     */
+    int getSize() {
+        int sum = 0;
+        for (Pile pile : piles) {
+            sum += pile.getSize();
+        }
+        return sum;
+    }
+
+    /**
      * Constructs a tableau by drawing cards from the deck.
      * 
      * @param deck - The deck to draw from.

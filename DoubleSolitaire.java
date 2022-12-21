@@ -85,6 +85,18 @@ final class DoubleSolitaire {
     }
 
     /**
+     * 
+     * @return the average score of players in the game
+     */
+    float averageSCore() {
+        int sum = 0;
+        for (Player player : players) {
+            sum += player.getScore();
+        }
+        return (float) sum / players.size();
+    }
+
+    /**
      * Prints all the cards in the game.
      */
     void print() {

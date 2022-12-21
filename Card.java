@@ -80,6 +80,9 @@ public class Card {
      *         {@code false} otherwise
      */
     boolean canBeBuiltUp(Card foundationCard) {
+        if (foundationCard.isKing()) {
+            return false;
+        }
         if (getSuit() == foundationCard.getSuit() && getRank().ordinal() == (foundationCard.getRank().ordinal() + 1)) {
             return true;
         } else {
