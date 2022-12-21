@@ -9,23 +9,35 @@ final class Tableau {
      */
     private Pile[] piles;
 
-    // FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /**
-     * Sorts the piles into descending order by size.
+     * Quicksorts the piles into descending order by size.
      * 
-     * @return - the sorted array of piles
+     * @param pilesToSort - The array of piles to sort.
+     * @param lowIndex    - The lowest index to sort from.
+     * @param highIndex   - The highest index to sort to.
+     * @param ascending   - {@code true} if it should be sorted in ascending order
+     *                    by size.
      */
-    private Pile[] sortSizeDescending() {
-        return piles;
-    }
-
-    /**
-     * Sorts the piles into ascending order by size.
-     * 
-     * @return - the sorted array of piles
-     */
-    private Pile[] sortSizeAscending() {
-        return piles;
+    private void sortSize(Pile[] pilesToSort, int lowIndex, int highIndex, boolean ascending) {
+        if (lowIndex >= highIndex || lowIndex < 0)
+            return;
+        Pile pivotElement = pilesToSort[highIndex];
+        int pivotIndex = lowIndex - 1;
+        for (int i = lowIndex; i < highIndex - 1; i++) {
+            if ((pilesToSort[i].getSize() <= pivotElement.getSize() && ascending)
+                    || (pilesToSort[i].getSize() >= pivotElement.getSize() && !ascending)) {
+                pivotIndex++;
+                Pile swapPile = pilesToSort[i];
+                pilesToSort[i] = pilesToSort[pivotIndex];
+                pilesToSort[pivotIndex] = swapPile;
+            }
+        }
+        pivotIndex++;
+        Pile swapPile = pilesToSort[highIndex];
+        pilesToSort[highIndex] = pilesToSort[pivotIndex];
+        pilesToSort[pivotIndex] = swapPile;
+        sortSize(pilesToSort, lowIndex, pivotIndex - 1, ascending);
+        sortSize(pilesToSort, pivotIndex + 1, highIndex, ascending);
     }
 
     /**
@@ -63,7 +75,9 @@ final class Tableau {
      * @return {@code true} if a card was played
      */
     boolean playCard(ArrayList<Foundation> foundations) {
-        for (Pile pile : sortSizeDescending()) {
+        Pile[] sortedDescendingPiles = piles.clone();
+        sortSize(sortedDescendingPiles, 0, piles.length - 1, false);
+        for (Pile pile : sortedDescendingPiles) {
             if (pile.playCard(foundations)) {
                 return true;
             }
@@ -77,8 +91,12 @@ final class Tableau {
      * @return {@code true} if a partial pile was moved
      */
     boolean movePile() {
-        for (Pile lowPile : sortSizeDescending()) {
-            for (Pile highPile : sortSizeAscending()) {
+        Pile[] sortedDescendingPiles = piles.clone();
+        sortSize(sortedDescendingPiles, 0, piles.length - 1, false);
+        for (Pile lowPile : sortedDescendingPiles) {
+            Pile[] sortedAscendingPiles = piles.clone();
+            sortSize(sortedAscendingPiles, 0, piles.length - 1, true);
+            for (Pile highPile : sortedAscendingPiles) {
                 if (highPile.merge(lowPile)) {
                     return true;
                 }
@@ -95,7 +113,9 @@ final class Tableau {
      * @return {@code true} if a card was moved
      */
     boolean moveFromWaste(Waste waste) {
-        for (Pile pile : sortSizeAscending()) {
+        Pile[] sortedAscendingPiles = piles.clone();
+        sortSize(sortedAscendingPiles, 0, piles.length - 1, true);
+        for (Pile pile : sortedAscendingPiles) {
             if (pile.moveFromWaste(waste)) {
                 return true;
             }
